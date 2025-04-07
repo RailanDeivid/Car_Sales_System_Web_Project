@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="cars" content="width=device-width, initial-scale=1.0">
+    <title>Cars</title>
+</head>
+{% block content %}
+    <body>
+        {% for Car in Cars %}
+            <h3>{{ Car.model }}</h3>
+        {% endfor %}
+    </body>
+{% endblock %}
+</html>
