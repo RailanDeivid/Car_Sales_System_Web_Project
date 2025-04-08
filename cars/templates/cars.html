@@ -8,7 +8,7 @@
 {% block content %}
     <body>
         {% for Car in Cars %}
-            <h3>{{ Car.model }}</h3>
+            <h3>{{ Car.model }} {{ Car.factory_year }} - {{ Car.brand}}</h3>
         {% endfor %}
     </body>
 {% endblock %}
