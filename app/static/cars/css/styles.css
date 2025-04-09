@@ -101,7 +101,7 @@ form button:hover {
 /* Container da imagem com overlay */
 .car-image-container {
   width: 100%;
-  height: 160px;
+  height: 150px;
   overflow: hidden;
   position: relative;
 }
