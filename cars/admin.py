@@ -8,9 +8,9 @@ class BrandAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class CarAdmin(admin.ModelAdmin):
-    list_display = ('model', 'brand', 'factory_year', 'model_year', 'value')
-    search_fields = ('model', 'brand', 'factory_year', 'model_year',)
-    list_filter = ('factory_year', 'model_year')
+    list_display = ('model', 'brand', 'factory_year', 'model_year', 'value', 'plate', 'mileage', 'color', 'engine',)
+    search_fields = ('model', 'brand', 'factory_year', 'model_year','plate', 'mileage', 'color', 'engine',)
+    list_filter = ('factory_year', 'model_year','plate', 'mileage', 'color', 'engine',)
 
 
 

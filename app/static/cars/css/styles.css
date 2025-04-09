@@ -1,0 +1,224 @@
+/* Variáveis de cores - Tema Dark */
+:root {
+  --primary: #ff3860;       /* Vermelho vibrante */
+  --primary-light: #ff1443; /* Vermelho mais escuro */
+  --secondary: #34bd22;     /* Verde água brilhante */
+  --dark-bg: #121212;       /* Fundo escuro */
+  --card-bg: #1e1e1e;       /* Fundo dos cards */
+  --text: #e0e0e0;          /* Texto claro */
+  --text-light: #a0a0a0;    /* Texto secundário */
+  --card-title: #ffffff;     /* Título branco */
+  --sponsored: #ff9f1c;     /* Laranja para patrocinados */
+  --border: #333333;        /* Bordas escuras */
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Formulário de busca - Estilo Neon */
+form {
+  max-width: 800px;
+  margin: 30px auto;
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 15px rgba(255, 56, 96, 0.2);
+}
+
+form input[type="text"] {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+form input[type="text"]::placeholder {
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+form button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+form button:hover {
+  background-color: var(--primary-light);
+  box-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
+}
+
+/* Grid de carros - Efeito de profundidade */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1300px;
+  margin: 40px auto;
+}
+
+/* Card de carro - Estilo Dark Modern */
+.car-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(2, 199, 18, 0.3);
+  border-color: var(--secondary);
+}
+
+/* Container da imagem com overlay */
+.car-image-container {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.car-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  z-index: 1;
+}
+
+.car-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.car-card:hover .car-image-container img {
+  transform: scale(1.1);
+}
+
+/* Conteúdo do card - Tipografia moderna */
+.car-card-content {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.car-card h2 {
+  font-size: 18px;
+  color: var(--card-title);
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Especificações (KM | Cor | Motor) - Estilo minimalista */
+.car-specs {
+  display: flex;
+  gap: 5px;
+  color: var(--text-light);
+  font-size: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-specs span:not(:last-child)::after {
+  position: absolute;
+  right: -5px;
+  color: var(--border);
+}
+
+/* Preço - Destaque neon */
+.car-price {
+  margin-top: auto;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.car-value {
+  color: var(--secondary);
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(0, 209, 178, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* Mensagem de nenhum resultado - Estilo dark */
+.no-results {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 40px;
+  color: var(--text-light);
+  font-size: 20px;
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .car-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  
+  .car-image-container {
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    flex-direction: column;
+  }
+  
+  form input[type="text"] {
+    padding: 12px 15px;
+  }
+  
+  form button {
+    padding: 12px;
+    width: 100%;
+  }
+  
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
+}

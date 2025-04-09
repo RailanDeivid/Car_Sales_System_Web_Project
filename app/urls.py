@@ -7,7 +7,7 @@ from cars.views import cars_viws
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("cars/", cars_viws),  
+    path("cars/", cars_viws, name="cars_list"),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 
 

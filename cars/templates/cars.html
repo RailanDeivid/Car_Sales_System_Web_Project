@@ -2,14 +2,46 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="cars" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cars</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cars/css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-{% block content %}
-    <body>
-        {% for Car in Cars %}
-            <h3>{{ Car.model }} {{ Car.factory_year }} - {{ Car.brand}}</h3>
-        {% endfor %}
-    </body>
-{% endblock %}
+<body>
+    {% block content %}
+    <form method="GET" action="{% url 'cars_list' %}">
+        <input type="text" name="search" placeholder="Buscar carro...">
+        <button type="submit">Buscar</button>
+    </form>
+    <div class="car-grid">
+        {% if cars %}
+            {% for car in cars %}
+                <div class="car-card">
+                    <div class="car-image-container">
+                        <img src="{{ car.photo.url }}" alt="{{ car.brand }} {{ car.model }}">
+                    </div>
+                    
+                    <div class="car-card-content">
+                        <h2>{{ car.brand }} {{ car.model }}</h2>
+                        
+                        <div class="car-specs">
+                            <span>{{ car.factory_year }}</span> |
+                            <span>{{ car.formatted_mileage |default:"-" }} km</span> | 
+                            <span>{{ car.color|default:"Cor não informada" }}</span> | 
+                            <span>{{ car.engine }}</span>
+                        </div>
+                        
+                        <div class="car-price">
+                            <span class="car-value">{{ car.formatted_value }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-results">Nenhum carro encontrado.</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
 </html>

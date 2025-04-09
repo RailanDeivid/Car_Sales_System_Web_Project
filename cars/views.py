@@ -8,10 +8,10 @@ def cars_viws(request):
     search =  request.GET.get('search')
     
     if search:
-        cars = Car.objects.filter(model__icontains=search)
+        cars = cars.filter(model__icontains=search)
     
     return render(
                 request, 
                 "cars.html", 
-                {'Cars': cars}
+                {'cars': cars}
     )
