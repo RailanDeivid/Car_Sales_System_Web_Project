@@ -5,18 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cars</title>
     {% load static %}
+    {% load humanize %}
     <link rel="stylesheet" href="{% static 'cars/css/styles.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="{% url 'cars_list' %}">Carros</a></li>
+          </ul>
+        </nav>
+    </header>
+
     {% block content %}
     <form method="GET" action="{% url 'cars_list' %}">
-        <input type="text" name="search" placeholder="Buscar carro...">
+        <input type="text" name="search" placeholder="Buscar carro..." value="{{ search }}">
         <button type="submit">Buscar</button>
     </form>
+
+    <!-- Cabeçalho com contagem -->
+    <div class="carros-header">
+        <p>{{ start_index }} - {{ end_index }} de {{ total_results|intcomma }} resultados</p>
+    </div>
+
     <div class="car-grid">
         {% if cars %}
-            {% for car in cars %}
+            {% for car in cars.object_list %}
                 <div class="car-card">
                     <div class="car-image-container">
                         <img src="{{ car.photo.url }}" alt="{{ car.brand }} {{ car.model }}">
@@ -24,10 +39,9 @@
                     
                     <div class="car-card-content">
                         <h2>{{ car.brand }} {{ car.model }}</h2>
-                        
                         <div class="car-specs">
                             <span>{{ car.factory_year }}</span> |
-                            <span>{{ car.formatted_mileage |default:"-" }} km</span> | 
+                            <span>{{ car.formatted_mileage|default:"-" }} km</span> | 
                             <span>{{ car.color|default:"Cor não informada" }}</span> | 
                             <span>{{ car.engine }}</span>
                         </div>
@@ -42,6 +56,24 @@
             <p class="no-results">Nenhum carro encontrado.</p>
         {% endif %}
     </div>
+
+    <!-- Paginação -->
+    <div class="pagination">
+        {% if cars.has_previous %}
+            <a href="?page={{ cars.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{ cars.number }} de {{ cars.paginator.num_pages }}</span>
+
+        {% if cars.has_next %}
+            <a href="?page={{ cars.next_page_number }}{% if search %}&search={{ search }}{% endif %}">Próxima</a>
+        {% endif %}
+    </div>
+
     {% endblock %}
+
+    <footer>
+        <p>&copy; 2025 Carros. Desenvolvido por Railan Deivid</p>
+    </footer>
 </body>
 </html>
