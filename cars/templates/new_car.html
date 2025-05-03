@@ -1,0 +1,19 @@
+{% extends "cars.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'cars/css/styles.css' %}">
+
+<div class="new-car-form">
+  <h1>Adicionar Novo Carro</h1>
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table>
+        {{ new_car_form.as_table }}
+      </table>
+      <div class="form-button-wrapper">
+        <button type="submit">Cadastrar</button>
+      </div>
+  </form>
+</div>
+{% endblock %}

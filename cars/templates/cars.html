@@ -14,29 +14,25 @@
         <nav>
           <ul>
             <li><a href="{% url 'cars_list' %}">Carros</a></li>
+            <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
           </ul>
         </nav>
     </header>
-
     {% block content %}
     <form method="GET" action="{% url 'cars_list' %}">
-        <input type="text" name="search" placeholder="Buscar carro..." value="{{ search }}">
+        <input type="text" name="search" placeholder="Buscar carro...">
         <button type="submit">Buscar</button>
     </form>
-
-    <!-- Cabeçalho com contagem -->
     <div class="carros-header">
         <p>{{ start_index }} - {{ end_index }} de {{ total_results|intcomma }} resultados</p>
     </div>
-
     <div class="car-grid">
         {% if cars %}
-            {% for car in cars.object_list %}
+            {% for car in cars %}
                 <div class="car-card">
                     <div class="car-image-container">
                         <img src="{{ car.photo.url }}" alt="{{ car.brand }} {{ car.model }}">
                     </div>
-                    
                     <div class="car-card-content">
                         <h2>{{ car.brand }} {{ car.model }}</h2>
                         <div class="car-specs">
@@ -69,11 +65,8 @@
             <a href="?page={{ cars.next_page_number }}{% if search %}&search={{ search }}{% endif %}">Próxima</a>
         {% endif %}
     </div>
-
-    {% endblock %}
-
     <footer>
-        <p>&copy; 2025 Carros. Desenvolvido por Railan Deivid</p>
+        <p>&copy; 2025 RaiCar Multimarcas.</p>
     </footer>
-</body>
+    {% endblock %}
 </html>
